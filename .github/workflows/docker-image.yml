@@ -16,15 +16,15 @@ jobs:
     - uses: actions/checkout@v3
     - name: Set up JDK    
       uses: actions/setup-java@v1      
-      with:        
-        java-version: 1.11
+      with:
+        java-version: 1.8
     - name: Build with Maven      
       run: mvn clean install
     - name: Publish to Docker Registry
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       uses: docker/build-push-action@v1
       with:
-        repository: tarkilhk/hongkong-bus
+        repository: tarkilhk/busplanner
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
         tag_with_ref: true

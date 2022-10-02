@@ -1,9 +1,8 @@
-FROM openjdk:8
+FROM openjdk:8-jdk-alpine
 
 EXPOSE 8778
 
-WORKDIR /app
+VOLUME /app
+COPY target/*.jar /busplanner.jar
 
-COPY target/busplanner-0.0.1-SNAPSHOT.jar /app/busplanner.jar
-
-ENTRYPOINT ["java","-jar", "/app/busplanner.jar"]
+ENTRYPOINT ["java","-jar","/busplanner.jar"]

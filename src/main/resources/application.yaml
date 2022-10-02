@@ -31,4 +31,4 @@ springdoc:
   packagesToScan: com.tarkil.busplanner
   pathsToMatch: /**
 server:
-  port: 8080
+  port: 8778

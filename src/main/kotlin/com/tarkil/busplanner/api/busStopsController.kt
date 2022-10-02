@@ -10,7 +10,7 @@ import java.util.*
 
 @RestController
 @RequestMapping("/bus-stops")
-class BusStopsController(val desiredBusStopRepository: DesiredBusStopRepository) {
+class busStopsController(val desiredBusStopRepository: DesiredBusStopRepository) {
 
     @GetMapping("names")
     fun getAllBusStops(): MutableList<String> {

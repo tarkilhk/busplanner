@@ -1,0 +1,34 @@
+spring:
+  jpa:
+    generate-ddl: 'true'
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: 'true'
+        temp:
+          use_jdbc_metadata_defaults: 'false'
+    hibernate:
+      ddl-auto: update
+      connection:
+        provider_class: org.hibernate.hikaricp.internal.HikariCPConnectionProvider
+  datasource:
+    password: ${JDBC_DATABASE_PASSWORD}
+    username: ${JDBC_DATABASE_USERNAME}
+    url: ${JDBC_DATABASE_URL}&createDatabaseIfNotExist=true
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximumPoolSize: '5'
+logging:
+  level:
+    org:
+      springframework:
+        web: WARN
+      hibernate: ERROR
+  file: logs/busplanner.log
+springdoc:
+  packagesToScan: com.tarkil.busplanner
+  pathsToMatch: /**
+server:
+  port: 8080

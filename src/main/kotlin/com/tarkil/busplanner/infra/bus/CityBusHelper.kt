@@ -226,16 +226,16 @@ class CityBusHelper {
 
             if (tableRowsNextbus_listitem.isNotEmpty()) {
                 for (myRow in tableRowsNextbus_listitem) {
-                    val cellWithTime = myRow.select("td:has(tr):matches(\\d+:\\d+)").select("td").last()
-                    val cellWithDistance = myRow.select("td:has(tr):matches(Distance)").select("td").last()
-                    if (cellWithTime != null && cellWithDistance != null) {
-                        arrivalTimes.add(
-                            BusStopTime(
-                                busStopNumber,
-                                cellWithTime.text(),
-                                cellWithDistance.text()
-                            )
-                        )
+                    val listOfLowestLevelTDs = myRow.select("td:not(:has(td))")
+                    if (listOfLowestLevelTDs.isNotEmpty()) {
+                        val cellWithTime = listOfLowestLevelTDs.first()
+                        // distance is the last cell from the table containing the results,so I just select last <td>
+                        val cellWithDistance = listOfLowestLevelTDs.last()
+                        if (cellWithTime != null && cellWithDistance != null) {
+                            arrivalTimes.add(BusStopTime(busStopNumber, cellWithTime.text(), cellWithDistance.text()))
+                        } else {
+                            log.error("Impossible situation : my list of TDs is not empty, but first() or last() are null")
+                        }
                     } else {
                         log.error("GetBusStopETA is successful, contains a table, but cells don't follow expected format for bus $busStopNumber")
                     }

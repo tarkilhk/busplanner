@@ -41,7 +41,7 @@ class ArrivalTimes(val cityBusHelper: CityBusHelper) {
         }
         //TODO : if several entries are -1, and no successful one, I will not send back the -1 issue; need to pick a first one (highly likely that they would all be the same root cause)
         if (this.arrivalTimes.size > 1) {
-            this.arrivalTimes.removeAll { it.isIsAnError }
+            this.arrivalTimes.removeAll { it.isAnError }
         }
         val map = HashMap<String, Any>()
         map["lastRefreshTime"] = this.lastRefreshTime
@@ -51,7 +51,7 @@ class ArrivalTimes(val cityBusHelper: CityBusHelper) {
     }
 
     fun clearPreviousBusTimesForBusNumber(busNumber: String) {
-        arrivalTimes.removeAll { it.isIsAnError }
+        arrivalTimes.removeAll { it.isAnError }
         arrivalTimes.removeAll { it.busNumber == busNumber }
     }
 

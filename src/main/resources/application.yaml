@@ -32,4 +32,5 @@ springdoc:
   pathsToMatch: /**
 server:
   use-forward-headers: true
+  forward-headers-strategy: framework
   port: 8778
